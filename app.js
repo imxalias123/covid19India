@@ -12,7 +12,7 @@ let db = null;
 const InitializeDBAndServer = async () => {
   try {
     db = await open({
-      fileName: dbPath,
+      filename: dbPath,
       driver: sqlite3.Database,
     });
     app.listen(3000, () => {
@@ -26,7 +26,7 @@ const InitializeDBAndServer = async () => {
 
 InitializeDBAndServer();
 
-convertStateObjectToReponseObject = (dbObject) => {
+convertStateObjectToResponseObject = (dbObject) => {
   return {
     stateId: dbObject.state_id,
     stateName: dbObject.state_name,
@@ -46,15 +46,19 @@ convertDistrictObjectToResponseObject = (dbObject) => {
   };
 };
 
-const authenticationToken = async (request, response, next) => {
+const authenticationToken = (request, response, next) => {
   let jwtToken;
   const authHeader = request.headers["authorization"];
-  if (authHeaders !== undefined) {
+  if (authHeader !== undefined) {
     jwtToken = authHeader.split(" ")[1];
+  }
+  if (jwtToken === undefined) {
+    response.status(401);
+    response.send("Invalid JWT Token");
   } else {
     jwt.verify(jwtToken, "MY_SECRET_TOKEN", async (error, payload) => {
       if (error) {
-        response.status(400);
+        response.status(401);
         response.send("Invalid JWT Token");
       } else {
         next();
@@ -85,10 +89,10 @@ app.post("/login/", async (request, response) => {
 
 app.get("/states/", authenticationToken, async (request, response) => {
   const getQuery = `
-    SELECT * FROM state`;
+    SELECT * FROM state;`;
   const dbQuery = await db.all(getQuery);
   response.send(
-    dbQuery.map((eachQuery) => convertStateObjectToReponseObject(eachQuery))
+    dbQuery.map((eachQuery) => convertStateObjectToResponseObject(eachQuery))
   );
 });
 
@@ -96,7 +100,7 @@ app.get("/states/:stateId/", authenticationToken, async (request, response) => {
   const getQuery = `
     SELECT * FROM state WHERE state_id = ${stateId};`;
   const dbUser = await db.get(getQuery);
-  response.send(convertStateObjectToReponseObject(dbUser));
+  response.send(convertStateObjectToResponseObject(dbUser));
 });
 
 app.post("/districts/", authenticationToken, async (request, response) => {

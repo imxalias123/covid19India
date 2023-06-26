@@ -8,17 +8,16 @@ Content-Type: application/json
 
 ###
 GET http://localhost:3000/states/
-Authorization: Bearer jhkhnj
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNjg3Nzk0NTI0fQ.-uPyc-WNVvA1a7W5G9-5ItCHZVvUK8rxggkraZbaUtE
 ###
 
-GET http://localhost:3000/states/:stateId/
-Authorization: Bearer jhkhnj
+GET http://localhost:3000/states/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNjg3Nzk0NTI0fQ.-uPyc-WNVvA1a7W5G9-5ItCHZVvUK8rxggkraZbaUtE
 
 ###
 POST http://localhost:3000/districts/
 Content-Type: application/json
-Authorization: Bearer jhkhnj
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNjg3Nzk0NTI0fQ.-uPyc-WNVvA1a7W5G9-5ItCHZVvUK8rxggkraZbaUtE
 
 {
   "districtName": "Bagalkot",
@@ -30,16 +29,16 @@ Authorization: Bearer jhkhnj
 }
 
 ###
-GET http://localhost:3000/districts/:districtId/
-Authorization: Bearer jhkhnj
+GET http://localhost:3000/districts/1/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNjg3Nzk0NTI0fQ.-uPyc-WNVvA1a7W5G9-5ItCHZVvUK8rxggkraZbaUtE
 
 ###
-DELETE http://localhost:3000/districts/:districtId/
-Authorization: Bearer jhkhnj
+DELETE http://localhost:3000/districts/2/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNjg3Nzk0NTI0fQ.-uPyc-WNVvA1a7W5G9-5ItCHZVvUK8rxggkraZbaUtE
 
 ###
-PUT http://localhost:3000/districts/:districtId/
-Authorization: Bearer jhkhnj
+PUT http://localhost:3000/districts/2/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNjg3NzkzNDgwfQ.8ARe1O5N8NOKdOl9oWwvrDOwF7N0PnQ7JRxgRUzQfc4
 Content-Type: application/json
 
 {
@@ -52,5 +51,5 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/states/:stateId/stats/
-Authorization: Bearer jhkhnj
+GET http://localhost:3000/states/4/stats/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNocmlzdG9waGVyX3BoaWxsaXBzIiwiaWF0IjoxNjg3NzkzNDgwfQ.8ARe1O5N8NOKdOl9oWwvrDOwF7N0PnQ7JRxgRUzQfc4
