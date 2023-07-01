@@ -37,7 +37,7 @@ convertStateObjectToResponseObject = (dbObject) => {
 convertDistrictObjectToResponseObject = (dbObject) => {
   return {
     districtId: dbObject.district_id,
-    districtNmae: dbObject.district_name,
+    districtName: dbObject.district_name,
     stateId: dbObject.state_id,
     cases: dbObject.cases,
     cured: dbObject.cured,
@@ -97,6 +97,7 @@ app.get("/states/", authenticationToken, async (request, response) => {
 });
 
 app.get("/states/:stateId/", authenticationToken, async (request, response) => {
+  const { stateId } = request.params;
   const getQuery = `
     SELECT * FROM state WHERE state_id = ${stateId};`;
   const dbUser = await db.get(getQuery);
@@ -104,6 +105,7 @@ app.get("/states/:stateId/", authenticationToken, async (request, response) => {
 });
 
 app.post("/districts/", authenticationToken, async (request, response) => {
+  const { stateId, districtName, cases, cured, active, deaths } = request.body;
   const getQuery = `
     INSERT INTO district 
     (state_id, district_name, cases, cured, active, deaths)
@@ -116,6 +118,7 @@ app.get(
   "/districts/:districtId/",
   authenticationToken,
   async (request, response) => {
+    const { districtId } = request.params;
     const getDistrictQuery = `
     SELECT * FROM district WHERE district_id = '${districtId}';`;
     const district = await db.get(getDistrictQuery);
@@ -127,8 +130,10 @@ app.delete(
   "/districts/:districtId/",
   authenticationToken,
   async (request, response) => {
+    const { districtId } = request.params;
     const deleteQuery = `
-    DELETE * FROM district WHERE district_id = ${districtId};`;
+    
+    DELETE FROM district WHERE district_id = ${districtId};`;
     const deleteQ = await db.run(deleteQuery);
     response.send("District Removed");
   }
@@ -138,6 +143,15 @@ app.put(
   "/districts/:districtId/",
   authenticationToken,
   async (request, response) => {
+    const { districtId } = request.params;
+    const {
+      stateId,
+      districtName,
+      cases,
+      cured,
+      active,
+      deaths,
+    } = request.body;
     const updateQuery = `
     UPDATE district
      SET 
